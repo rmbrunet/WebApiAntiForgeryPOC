@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html data-ng-app>
+    <head>
+        <title>Angular Test</title>
+    </head>
+    <body data-ng-controller="Ctrl">
+        <div>
+            <form data-ng-submit="submit()">
+                <label for="data">Data:</label>
+                <input id="data" type="text" placeholder="placeholder" data-ng-model="data" />
+                <br />
+                <input type="submit" value="Submit" />
+                <br />
+                <label>Received token: {{token}}</label>
+            </form>
+        </div>
+        <!-- -Using Angularjs just for convenience -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+        <script>
+            function Ctrl($scope, $http) {
+                $scope.data = 'initial value';
+                $scope.token = '';
+
+                function initialize() {
+                    //Call to the server to get the Antiforgery tokens.
+                    $http.get('api/Home/Tokens').
+                        success(function (data, status, headers) {
+                        //Save the header token.
+                            $scope.token = headers('__RequestVerificationToken');
+                        }).
+                        error(function (data, status) {
+                            alert('Request failed!');
+                        });
+                };
+
+                $scope.submit = function () {
+                    $http.post('api/Home/Data', '=' +  $scope.data, { headers: { '__RequestVerificationToken': $scope.token, 'Content-Type': 'application/x-www-form-urlencoded' } }).
+                        success(function (data, status, headers) {
+                            //Antiforgery token validated!
+                            $scope.token = headers('__RequestVerificationToken');
+                            alert('Request succeded');
+                        }).
+                        error(function (data, status) {
+                            //Antiforgery validation failed
+                            alert('Request failed!');
+                        });
+                };
+
+                initialize();
+            }
+        </script>
+    </body>
+</html>
