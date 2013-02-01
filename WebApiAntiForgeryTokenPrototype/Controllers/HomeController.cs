@@ -11,15 +11,15 @@ namespace WebApiAntiForgeryTokenPrototype.Controllers
     public class HomeController : ApiController
     {
         [HttpGet]
-        [GenerateHttpHeaderAntiForgeryAttribute]
+        [AntiForgeryAttribute]
         public HttpResponseMessage Tokens() {
             //Just returning the Antiforgery cookie and header tokens. 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
         
         [HttpPost]
-        [HttpHeaderAntiForgeryTokenAttribute]
-        [GenerateHttpHeaderAntiForgeryAttribute]
+        [ValidateAntiForgeryTokenAttribute]
+        [AntiForgeryAttribute]
         public HttpResponseMessage Data([FromBody]string data) {
             //At this point the Antiforgery Token has been validated by the filter
             //Do something with the data here

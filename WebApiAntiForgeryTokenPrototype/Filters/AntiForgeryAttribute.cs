@@ -9,8 +9,9 @@ using System.Web.Helpers;
 namespace WebApiAntiForgeryTokenPrototype {
     /// <summary>
     /// This attribute must generate the Anti Forgery tokens and send them to the client.
+    /// http://aspnetwebstack.codeplex.com/SourceControl/changeset/view/1b78397f32fc#src/System.Web.WebPages/Helpers/AntiForgery.cs
     /// </summary>
-    public class GenerateHttpHeaderAntiForgeryAttribute : System.Web.Http.Filters.ActionFilterAttribute {
+    public class AntiForgeryAttribute : System.Web.Http.Filters.ActionFilterAttribute {
         public override void OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext actionExecutedContext) {
             if (actionExecutedContext == null) {
                 throw new ArgumentNullException("actionContext");

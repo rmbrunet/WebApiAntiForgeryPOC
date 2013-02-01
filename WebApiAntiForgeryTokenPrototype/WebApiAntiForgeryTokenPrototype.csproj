@@ -105,8 +105,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Filters\GenerateHttpHeaderAntiForgeryAttribute.cs" />
-    <Compile Include="Filters\HttpHeaderAntiForgeryTokenAttribute.cs" />
+    <Compile Include="Filters\AntiForgeryAttribute.cs" />
+    <Compile Include="Filters\ValidateAntiForgeryTokenAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

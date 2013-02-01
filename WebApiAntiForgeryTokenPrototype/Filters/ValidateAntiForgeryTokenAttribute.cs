@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Helpers;
 
 namespace WebApiAntiForgeryTokenPrototype {
-    public class HttpHeaderAntiForgeryTokenAttribute : System.Web.Http.Filters.AuthorizationFilterAttribute {
+    public class ValidateAntiForgeryTokenAttribute : System.Web.Http.Filters.AuthorizationFilterAttribute {
         static string _tokenKey = AntiForgeryConfig.CookieName;
 
         public override void OnAuthorization(System.Web.Http.Controllers.HttpActionContext actionContext) {
